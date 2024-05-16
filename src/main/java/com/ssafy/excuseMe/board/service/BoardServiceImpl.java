@@ -15,7 +15,7 @@ import com.ssafy.excuseMe.board.mapper.BoardMapper;
 public class BoardServiceImpl implements BoardService {
 	
 	private final BoardMapper boardMapper;
-
+	
 	public BoardServiceImpl(BoardMapper boardMapper) {
 		super();
 		this.boardMapper = boardMapper;

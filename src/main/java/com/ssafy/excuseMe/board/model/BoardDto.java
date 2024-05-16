@@ -14,7 +14,7 @@ import lombok.ToString;
 public class BoardDto {
 	
 	@Schema(description = "작성자 ID")
-	int user_id;
+	String user_id;
 	@Schema(description = "글번호")
 	int id;
 	@Schema(description = "제목")
@@ -27,7 +27,7 @@ public class BoardDto {
 	int view;
 	@Schema(description = "좋아요수")
 	int like;
-	public BoardDto(int user_id, String title, String contents) {
+	public BoardDto(String user_id, String title, String contents) {
 		super();
 		this.user_id = user_id;
 		this.title = title;

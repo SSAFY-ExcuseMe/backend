@@ -4,8 +4,8 @@
 <mapper namespace="com.ssafy.excuseMe.board.mapper.BoardMapper">
 
 	<insert id="writeArticle" parameterType="boardDto">
-		insert into board (user_id, title, contents, view, like, created_date)
-		values (#{user_id}, #{title}, #{content}, 0, 0, now())
+		insert into board (user_id, title, contents, view, `like`, created_date)
+		values (#{user_id}, #{title}, #{contents}, 0, 0, now())
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
 			select last_insert_id()
 		</selectKey>
