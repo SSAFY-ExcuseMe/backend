@@ -10,4 +10,5 @@ import com.ssafy.excuseMe.tour.model.TourDto;
 @Mapper
 public interface TourMapper {
 	List<TourDto> listTour(Map<String,String> map);
+	
 }
