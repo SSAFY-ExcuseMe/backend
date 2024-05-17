@@ -19,5 +19,8 @@ public interface RouteMapper {
 	
 	RouteDto getRoute(int routeId) throws SQLException;
 	List<TourDto> getTourList(int routeId) throws SQLException;
+	
+	void deleteTourList(int routeId) throws SQLException;
+	void deleteRoute(int routeId) throws SQLException;
 
 }

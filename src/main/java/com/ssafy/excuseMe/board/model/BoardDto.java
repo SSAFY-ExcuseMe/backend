@@ -10,6 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Schema(title = "BoardDto : 게시글정보", description = "게시글의 상세 정보를 나타낸다.")
 public class BoardDto {
 	
@@ -27,13 +28,8 @@ public class BoardDto {
 	int view;
 	@Schema(description = "좋아요수")
 	int like;
-	public BoardDto(String user_id, String title, String contents) {
-		super();
-		this.user_id = user_id;
-		this.title = title;
-		this.contents = contents;
-	}
-	
+	@Schema(description = "사진위치")
+	String img;
 	
 	
 }

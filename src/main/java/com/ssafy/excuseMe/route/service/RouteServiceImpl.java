@@ -1,5 +1,6 @@
 package com.ssafy.excuseMe.route.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,16 @@ public class RouteServiceImpl implements RouteService {
 	@Override
 	public List<TourDto> getTourList(int routeId) throws Exception {
 		return routeMapper.getTourList(routeId);
+	}
+
+	@Override
+	public void deleteTourList(int routeId) throws SQLException {
+		routeMapper.deleteTourList(routeId);
+	}
+
+	@Override
+	public void deleteRoute(int routeId) throws SQLException {
+		routeMapper.deleteRoute(routeId);
 	}
 
 	

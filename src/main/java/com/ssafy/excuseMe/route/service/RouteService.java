@@ -1,5 +1,6 @@
 package com.ssafy.excuseMe.route.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.ssafy.excuseMe.route.model.RouteDto;
@@ -14,6 +15,8 @@ public interface RouteService {
 	
 	RouteDto getRoute(int routeId) throws Exception;
 	List<TourDto> getTourList(int routeId) throws Exception;
-
+	
+	void deleteTourList(int routeId) throws SQLException;
+	void deleteRoute(int routeId) throws SQLException;
 
 }

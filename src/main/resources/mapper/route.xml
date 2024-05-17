@@ -39,4 +39,16 @@
 		from tour
 		where id in (select tour_id from tour_route_list where id = #{routeId})
 	</select>
+	
+	<delete id="deleteTourList" parameterType ="int">
+	delete 
+	from tour_route_list
+	where id = #{routeId}
+	</delete>
+	
+	<delete id="deleteRoute" parameterType = "int">
+	delete
+	from tour_route
+	where id = #{routeId}
+	</delete>
 </mapper>
