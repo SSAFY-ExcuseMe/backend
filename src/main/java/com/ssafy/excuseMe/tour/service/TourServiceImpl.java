@@ -19,8 +19,13 @@ public class TourServiceImpl implements TourService{
 
 	@Override
 	@Transactional
-	public List<TourDto> listTour(Map<String, String> map) {
+	public List<TourDto> listTour(Map<String, Object> map) {
 		 return tourMapper.listTour(map);
+	}
+
+	@Override
+	public TourDto getTour(int tourId) throws Exception {
+		return tourMapper.getTour(tourId);
 	}
 
 }

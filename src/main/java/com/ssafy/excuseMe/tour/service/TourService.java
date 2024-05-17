@@ -8,5 +8,6 @@ import org.springframework.stereotype.Service;
 import com.ssafy.excuseMe.tour.model.TourDto;
 
 public interface TourService{
-	List<TourDto> listTour(Map<String,String> map);
+	List<TourDto> listTour(Map<String, Object> map);
+	TourDto getTour(int tourId) throws Exception;
 }
