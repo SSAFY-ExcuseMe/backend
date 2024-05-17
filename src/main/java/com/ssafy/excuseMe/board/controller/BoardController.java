@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.excuseMe.board.model.BoardDto;
 import com.ssafy.excuseMe.board.model.BoardListDto;
+import com.ssafy.excuseMe.board.model.CommentDto;
 import com.ssafy.excuseMe.board.service.BoardService;
+import com.ssafy.excuseMe.util.JWTUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 //@CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.POST} , maxAge = 6000)
@@ -35,11 +38,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BoardController {
 
-	private BoardService boardService;
+	private final BoardService boardService;
+	private final JWTUtil jwtUtil;
 
-	public BoardController(BoardService boardService) {
+	public BoardController(BoardService boardService, JWTUtil jwtUtil) {
 		super();
 		this.boardService = boardService;
+		this.jwtUtil = jwtUtil;
 	}
 	
 	@Operation(summary = "게시판 글작성", description = "새로운 게시글 정보를 입력한다.")
@@ -112,9 +117,30 @@ public class BoardController {
 		return ResponseEntity.ok().build();
 
 	}
+	
+	
+	@PostMapping("/comment")
+	public ResponseEntity<?> writeArticle(
+			@RequestBody @Parameter(description = "작성글 정보.", required = true) CommentDto commentDto, HttpServletRequest request) {
+		try {
+			commentDto.setUser_id(getUserIdFromToken(request.getHeader("Authorization")));
+			boardService.writeComment(commentDto);
+			return new ResponseEntity<Void>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			return exceptionHandling(e);
+		}
+	}
 
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	
+	private String getUserIdFromToken(String token) {
+	    // Extract userId from the token using your JWTUtil or any JWT parsing library
+	    return jwtUtil.getUserId(token);
+	}
+
+	
+	
 }

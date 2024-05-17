@@ -1,6 +1,8 @@
 package com.ssafy.excuseMe.board.model;
 
 
+import java.util.List;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,8 @@ public class BoardDto {
 	int like;
 	@Schema(description = "사진위치")
 	String img;
+	@Schema(description = "댓글")
+	List<CommentDto> comments;
 	
 	
 }

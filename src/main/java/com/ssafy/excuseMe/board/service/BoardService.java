@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ssafy.excuseMe.board.model.BoardDto;
 import com.ssafy.excuseMe.board.model.BoardListDto;
+import com.ssafy.excuseMe.board.model.CommentDto;
 
 public interface BoardService {
 	
@@ -16,5 +17,8 @@ public interface BoardService {
 	
 	void modifyArticle(BoardDto boardDto) throws Exception;
 	void deleteArticle(int articleNo) throws Exception;
+	
+	//댓글
+	void writeComment(CommentDto commentDto) throws Exception;
 
 }

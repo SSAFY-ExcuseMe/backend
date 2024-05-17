@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.excuseMe.board.model.BoardDto;
 import com.ssafy.excuseMe.board.model.BoardListDto;
+import com.ssafy.excuseMe.board.model.CommentDto;
 import com.ssafy.excuseMe.board.mapper.BoardMapper;
 
 @Service
@@ -68,15 +69,18 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void modifyArticle(BoardDto boardDto) throws Exception {
-		// TODO : BoardDaoImpl의 modifyArticle 호출
 		boardMapper.modifyArticle(boardDto);
 	}
 
 	@Override
 	public void deleteArticle(int articleNo) throws Exception {
-		// TODO : BoardDaoImpl의 deleteArticle 호출
 		boardMapper.deleteArticle(articleNo);
 	
+	}
+
+	@Override
+	public void writeComment(CommentDto commentDto) throws Exception {
+		boardMapper.writeComment(commentDto);
 	}
 
 }

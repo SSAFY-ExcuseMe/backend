@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssafy.excuseMe.board.model.BoardDto;
+import com.ssafy.excuseMe.board.model.CommentDto;
 
 @Mapper
 public interface BoardMapper {
@@ -24,6 +25,8 @@ public interface BoardMapper {
 	void modifyArticle(BoardDto boardDto) throws SQLException;
 	
 	void deleteArticle(int articleNo) throws SQLException;
+	
+	void writeComment(CommentDto commentDto) throws Exception;
 
 
 }

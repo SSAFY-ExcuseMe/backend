@@ -64,4 +64,12 @@
 		delete from board
 		where id = #{articleNo}
 	</delete>
+	
+	<insert id="writeComment" parameterType="commentDto">
+		insert into comment (post_id, user_id, contents, `like`, created_date)
+		values (#{post_id}, #{user_id}, #{contents}, 0, now())
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
 </mapper>
