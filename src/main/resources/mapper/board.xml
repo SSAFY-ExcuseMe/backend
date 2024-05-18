@@ -46,6 +46,12 @@
 		from board 
 		where id = #{articleNo}
 	</select>
+	
+	<select id ="getComment" parameterType = "int" resultType ="commentDto">
+	select * 
+	from comment 
+	where post_id = #{articleNo}
+	</select>
 
 	<update id="updateHit" parameterType="int">
 		update board

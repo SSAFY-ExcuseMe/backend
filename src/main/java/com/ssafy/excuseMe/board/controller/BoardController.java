@@ -87,7 +87,9 @@ public class BoardController {
 			throws Exception {
 		log.info("getArticle - 호출 : " + articleno);
 		boardService.updateHit(articleno);
-		return new ResponseEntity<BoardDto>(boardService.getArticle(articleno), HttpStatus.OK);
+		BoardDto bd = boardService.getArticle(articleno);
+		bd.setComments(boardService.getComment(articleno));
+		return new ResponseEntity<BoardDto>(bd, HttpStatus.OK);
 	}
 	
 	@Operation(summary = "수정 할 글 얻기", description = "글번호에 해당하는 게시글의 정보를 반환한다.")

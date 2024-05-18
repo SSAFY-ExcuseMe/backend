@@ -13,6 +13,8 @@ public interface BoardService {
 	BoardListDto listArticle(Map<String, String> map) throws Exception;
 
 	BoardDto getArticle(int articleNo) throws Exception;
+	List<CommentDto> getComment(int artilceNo) throws Exception;
+	
 	void updateHit(int articleNo) throws Exception;
 	
 	void modifyArticle(BoardDto boardDto) throws Exception;
