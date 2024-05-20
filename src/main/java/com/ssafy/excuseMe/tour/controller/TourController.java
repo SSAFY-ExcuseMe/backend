@@ -1,5 +1,7 @@
 package com.ssafy.excuseMe.tour.controller;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,10 @@ public class TourController {
 			){
 		Map<String,Object> data = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
+		// Decode parameters
+	    keyword = keyword != null ? URLDecoder.decode(keyword, StandardCharsets.UTF_8) : null;
+	    type = type != null ? URLDecoder.decode(type, StandardCharsets.UTF_8) : null;
+	    region = region != null ? URLDecoder.decode(region, StandardCharsets.UTF_8) : null;
 		map.put("keyword", keyword);
 		map.put("type", type);
 		map.put("region",region);

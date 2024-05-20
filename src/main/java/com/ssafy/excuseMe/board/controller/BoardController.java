@@ -50,9 +50,11 @@ public class BoardController {
 	@Operation(summary = "게시판 글작성", description = "새로운 게시글 정보를 입력한다.")
 	@PostMapping
 	public ResponseEntity<?> writeArticle(
-			@RequestBody @Parameter(description = "작성글 정보.", required = true) BoardDto boardDto) {
+			@RequestBody @Parameter(description = "작성글 정보.", required = true) BoardDto boardDto,
+			HttpServletRequest request) {
 		log.info("writeArticle boardDto - {}", boardDto);
 		try {
+			boardDto.setUser_id(getUserIdFromToken(request.getHeader("Authorization")));
 			boardService.writeArticle(boardDto);
 //			return ResponseEntity.ok().build();
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -121,10 +123,12 @@ public class BoardController {
 	}
 	
 	
-	@PostMapping("/comment")
+	@PostMapping("/{articleno}/comment")
 	public ResponseEntity<?> writeArticle(
+			@PathVariable("articleno") @Parameter(name = "articleno", description = "살제할 글의 글번호.", required = true) int articleno,
 			@RequestBody @Parameter(description = "작성글 정보.", required = true) CommentDto commentDto, HttpServletRequest request) {
 		try {
+			commentDto.setPost_id(articleno);
 			commentDto.setUser_id(getUserIdFromToken(request.getHeader("Authorization")));
 			boardService.writeComment(commentDto);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
@@ -133,16 +137,15 @@ public class BoardController {
 		}
 	}
 
+	
 	private ResponseEntity<String> exceptionHandling(Exception e) {
 		e.printStackTrace();
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	private String getUserIdFromToken(String token) {
-	    // Extract userId from the token using your JWTUtil or any JWT parsing library
 	    return jwtUtil.getUserId(token);
 	}
-
 	
 	
 }
