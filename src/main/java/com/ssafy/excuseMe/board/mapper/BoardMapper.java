@@ -33,6 +33,10 @@ public interface BoardMapper {
 	void deleteComment(int commentNo) throws SQLException;
 	
 	void beforedeleteArticle(int articleNo) throws SQLException;
+	
+	void likeArticle(String user_id, int articleno) throws SQLException;
+	
+	void likeHit(int aritlceno)throws SQLException;
 
 
 }

@@ -22,6 +22,9 @@ public interface BoardService {
 	void beforedeleteArticle(int articleNo) throws Exception;
 	void deleteArticle(int articleNo) throws Exception;
 	
+	void likeArticle(String user_id, int articleno) throws Exception;
+	void likeHit(int articleno) throws Exception;
+	
 	//댓글
 	void writeComment(CommentDto commentDto) throws Exception;
 	void deleteComment(int commentNo) throws Exception;

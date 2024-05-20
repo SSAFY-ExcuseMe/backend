@@ -99,4 +99,16 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.beforedeleteArticle(articleNo);
 	}
 
+	@Override
+	public void likeArticle(String user_id, int articleno) throws Exception {
+		boardMapper.likeArticle(user_id, articleno);
+		
+	}
+
+	@Override
+	public void likeHit(int articleno) throws Exception {
+		boardMapper.likeHit(articleno);
+		
+	}
+
 }

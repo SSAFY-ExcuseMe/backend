@@ -123,6 +123,15 @@ public class BoardController {
 
 	}
 	
+	@PostMapping("/{articleno}/like")
+	public ResponseEntity<?> likeArticle(@PathVariable("articleno") @Parameter(name = "articleno", description = "글의 번호.", required = true) int articleno,
+			HttpServletRequest request) throws Exception{
+		String user_id = getUserIdFromToken(request.getHeader("Authorization"));
+		boardService.likeArticle(user_id,articleno);
+		boardService.likeHit(articleno);
+		return ResponseEntity.ok().build();
+	}
+	
 	
 	@PostMapping("/{articleno}/comment")
 	public ResponseEntity<?> writeComment(
