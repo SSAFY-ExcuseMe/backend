@@ -117,6 +117,7 @@ public class BoardController {
 	@DeleteMapping("/{articleno}")
 	public ResponseEntity<String> deleteArticle(@PathVariable("articleno") @Parameter(name = "articleno", description = "살제할 글의 글번호.", required = true) int articleno) throws Exception {
 		log.info("deleteArticle - 호출");
+		boardService.beforedeleteArticle(articleno);
 		boardService.deleteArticle(articleno);
 		return ResponseEntity.ok().build();
 
@@ -124,7 +125,7 @@ public class BoardController {
 	
 	
 	@PostMapping("/{articleno}/comment")
-	public ResponseEntity<?> writeArticle(
+	public ResponseEntity<?> writeComment(
 			@PathVariable("articleno") @Parameter(name = "articleno", description = "살제할 글의 글번호.", required = true) int articleno,
 			@RequestBody @Parameter(description = "작성글 정보.", required = true) CommentDto commentDto, HttpServletRequest request) {
 		try {
@@ -135,6 +136,14 @@ public class BoardController {
 		} catch (Exception e) {
 			return exceptionHandling(e);
 		}
+	}
+	
+	@DeleteMapping("/comment/{commentno}")
+	public ResponseEntity<String> deleteComment(@PathVariable("commentno") @Parameter(name = "commentno", description = "살제할 댓글의 번호.", required = true) int commentno) throws Exception {
+		boardService.deleteComment(commentno);
+		log.info("finsih");
+		return ResponseEntity.ok().build();
+
 	}
 
 	

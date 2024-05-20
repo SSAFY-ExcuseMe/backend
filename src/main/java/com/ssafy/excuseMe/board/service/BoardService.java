@@ -18,9 +18,12 @@ public interface BoardService {
 	void updateHit(int articleNo) throws Exception;
 	
 	void modifyArticle(BoardDto boardDto) throws Exception;
+	
+	void beforedeleteArticle(int articleNo) throws Exception;
 	void deleteArticle(int articleNo) throws Exception;
 	
 	//댓글
 	void writeComment(CommentDto commentDto) throws Exception;
+	void deleteComment(int commentNo) throws Exception;
 
 }

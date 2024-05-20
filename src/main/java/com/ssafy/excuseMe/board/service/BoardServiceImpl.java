@@ -88,4 +88,15 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.getComment(articleNo);
 	}
 
+	@Override
+	public void deleteComment(int commentNo) throws Exception {
+		boardMapper.deleteComment(commentNo);
+		
+	}
+
+	@Override
+	public void beforedeleteArticle(int articleNo) throws Exception {
+		boardMapper.beforedeleteArticle(articleNo);
+	}
+
 }

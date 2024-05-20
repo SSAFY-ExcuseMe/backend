@@ -11,6 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class CommentDto {
 	
+	int id;
 	int post_id;
 	String contents;
 	String user_id;

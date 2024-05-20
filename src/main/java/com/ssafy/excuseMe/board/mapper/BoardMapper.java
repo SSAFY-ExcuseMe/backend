@@ -29,6 +29,10 @@ public interface BoardMapper {
 	void deleteArticle(int articleNo) throws SQLException;
 	
 	void writeComment(CommentDto commentDto) throws Exception;
+	
+	void deleteComment(int commentNo) throws SQLException;
+	
+	void beforedeleteArticle(int articleNo) throws SQLException;
 
 
 }

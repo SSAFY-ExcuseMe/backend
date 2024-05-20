@@ -69,6 +69,12 @@
 	<delete id="deleteArticle" parameterType="int">
 		delete from board
 		where id = #{articleNo}
+	
+	</delete>
+	
+	<delete id="beforedeleteArticle" parameterType="int">
+		delete from comment
+		where post_id = #{articleNo}
 	</delete>
 	
 	<insert id="writeComment" parameterType="commentDto">
@@ -78,4 +84,9 @@
 			select last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from comment
+		where id = #{commentNo}
+	</delete>
 </mapper>

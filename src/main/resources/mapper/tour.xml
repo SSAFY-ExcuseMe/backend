@@ -13,7 +13,7 @@
 				and addr like concat('%', #{region}, '%')
 			</if>
 			<if test="type !=null and type!=''">
-				and type like concat('%', #{type}, '%')
+				and type = #{type}
 			</if>
 		</where>
 		limit #{page}, 20
