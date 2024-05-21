@@ -39,6 +39,8 @@ public interface BoardMapper {
 	void likeArticle(String user_id, int articleno) throws SQLException;
 	
 	void likeHit(int aritlceno)throws SQLException;
+	
+	int check(String user_id, int articleno) throws SQLException;
 
 
 }

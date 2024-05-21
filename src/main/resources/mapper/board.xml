@@ -89,6 +89,12 @@
 	where id = #{articleno}
 	</update>
 	
+	<select id ="check" parameterType = "Object" resultType ="int">
+	select count(*)
+	from board_like 
+	where board_id = #{articleno} and user_id = #{user_id}
+	</select>
+	
 	<insert id = "likeArticle" parameterType = "Object">
 	insert into board_like (user_id, board_id)
 	values (#{user_id}, #{articleno})

@@ -150,7 +150,7 @@ public class BoardController {
 			HttpServletRequest request) throws Exception{
 		String user_id = getUserIdFromToken(request.getHeader("Authorization"));
 		boardService.likeArticle(user_id,articleno);
-		boardService.likeHit(articleno);
+		if(boardService.check(user_id,articleno))boardService.likeHit(articleno);
 		return ResponseEntity.ok().build();
 	}
 	

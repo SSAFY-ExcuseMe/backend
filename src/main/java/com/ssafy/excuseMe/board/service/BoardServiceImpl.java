@@ -110,6 +110,12 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public boolean check(String user_id, int articleno) throws Exception {
+		if(boardMapper.check(user_id, articleno)<=1) return true;
+		return false;
+	}
+
 
 
 }
