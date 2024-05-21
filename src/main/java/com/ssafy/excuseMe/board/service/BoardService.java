@@ -10,7 +10,8 @@ import com.ssafy.excuseMe.board.model.CommentDto;
 public interface BoardService {
 	
 	void writeArticle(BoardDto boardDto) throws Exception;
-	BoardListDto listArticle(Map<String, String> map) throws Exception;
+	BoardListDto listArticle(Map<String, Object> map) throws Exception;
+	BoardListDto mylistArticle(Map<String,Object> map) throws Exception;
 
 	BoardDto getArticle(int articleNo) throws Exception;
 	List<CommentDto> getComment(int artilceNo) throws Exception;

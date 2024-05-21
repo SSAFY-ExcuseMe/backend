@@ -30,15 +30,21 @@
 		from board 
 		<include refid="search"></include>
 		order by id desc
-		limit #{start}, #{listsize}
+		limit #{page}, 20
+	</select>
+	
+	<select id="mylistArticle" parameterType="map" resultType="boardDto">
+		select *
+		from board 
+		where user_id = #{user_id}
+		order by id desc
+		limit #{page}, 20
 	</select>
 	
 	<select id="getTotalArticleCount" parameterType="map" resultType="int">
 		select count(id)
 		from board
-		<where>
-			<include refid="search"></include>
-		</where>
+
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultType="boardDto">

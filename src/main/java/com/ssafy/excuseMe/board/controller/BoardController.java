@@ -1,6 +1,10 @@
 package com.ssafy.excuseMe.board.controller;
 
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpHeaders;
@@ -22,6 +26,7 @@ import com.ssafy.excuseMe.board.model.BoardDto;
 import com.ssafy.excuseMe.board.model.BoardListDto;
 import com.ssafy.excuseMe.board.model.CommentDto;
 import com.ssafy.excuseMe.board.service.BoardService;
+import com.ssafy.excuseMe.tour.model.TourDto;
 import com.ssafy.excuseMe.util.JWTUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -70,17 +75,32 @@ public class BoardController {
 			@ApiResponse(responseCode = "404", description = "페이지없어!!"),
 			@ApiResponse(responseCode = "500", description = "서버에러!!") })
 	@GetMapping
-	public ResponseEntity<?> listArticle(
-			@RequestParam @Parameter(description = "게시글을 얻기위한 부가정보.", required = true) Map<String, String> map) {
-		log.info("listArticle map - {}", map);
-		try {
-			BoardListDto boardListDto = boardService.listArticle(map);
-			HttpHeaders header = new HttpHeaders();
-			header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-			return ResponseEntity.ok().headers(header).body(boardListDto);
-		} catch (Exception e) {
-			return exceptionHandling(e);
-		}
+	public Map<String,Object> listArticle(
+			@RequestParam(value = "page", defaultValue = "1") int page) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		map.put("page", (page-1)*20);
+		BoardListDto list = boardService.listArticle(map);
+		System.out.println(list);
+		data.put("totalCount", list.getArticles().size());
+		data.put("tourList", list);
+		return data;
+		
+	}
+	
+	@GetMapping("/myArticle")
+	public Map<String,Object> mylistArticle(
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			HttpServletRequest request) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		map.put("page", (page-1)*20);
+		map.put("user_id",getUserIdFromToken(request.getHeader("Authorization")));
+		BoardListDto list = boardService.mylistArticle(map);
+		System.out.println(list);
+		data.put("totalCount", list.getArticles().size());
+		data.put("tourList", list);
+		return data;
 	}
 	
 	
