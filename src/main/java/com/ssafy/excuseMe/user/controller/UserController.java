@@ -126,9 +126,8 @@ public class UserController {
 	}
 	
 	@Operation(summary = "회원인증", description = "회원 정보를 담은 Token 을 반환한다.")
-	@GetMapping("/info/{userId}")
+	@GetMapping
 	public ResponseEntity<Map<String, Object>> getInfo(
-			@PathVariable("userId") @Parameter(description = "인증할 회원의 아이디.", required = true) String userId,
 			HttpServletRequest request) {
 //		logger.debug("userId : {} ", userId);
 		Map<String, Object> resultMap = new HashMap<>();
@@ -137,6 +136,7 @@ public class UserController {
 			log.info("사용 가능한 토큰!!!");
 			try {
 //				로그인 사용자 정보.
+				String userId = getUserIdFromToken(request.getHeader("Authorization"));
 				UserDto memberDto = userService.userInfo(userId);
 				resultMap.put("userInfo", memberDto);
 				status = HttpStatus.OK;
