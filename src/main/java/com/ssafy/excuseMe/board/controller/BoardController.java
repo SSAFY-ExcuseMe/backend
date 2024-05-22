@@ -126,11 +126,12 @@ public class BoardController {
 	}
 	
 	@Operation(summary = "게시판 글수정", description = "수정할 게시글 정보를 입력한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.")
-	@PutMapping
+	@PutMapping("/{articleno}")
 	public ResponseEntity<String> modifyArticle(
-		@RequestBody @Parameter(description = "수정할 글정보.", required = true) BoardDto boardDto) throws Exception {
+			@PathVariable("articleno") @Parameter(name = "articleno", description = "살제할 글의 글번호.", required = true) int articleno,
+			@RequestBody @Parameter(description = "수정할 글정보.", required = true) BoardDto boardDto) throws Exception {
 		log.info("modifyArticle - 호출 {}", boardDto);
-
+		boardDto.setId(articleno);
 		boardService.modifyArticle(boardDto);
 		return ResponseEntity.ok().build();
 	}
