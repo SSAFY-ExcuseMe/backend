@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public BoardListDto mylistArticle(Map<String, Object> map) throws Exception {
-		List<BoardDto> list = boardMapper.listArticle(map);
+		List<BoardDto> list = boardMapper.mylistArticle(map);
 
 		int totalArticleCount = boardMapper.getTotalArticleCount(map);
 		int totalPageCount = (totalArticleCount - 1) / 20 + 1;
